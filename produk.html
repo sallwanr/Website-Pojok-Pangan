@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produk - Pojok Pangan</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      color: #333;
+    }
+
+    header {
+      background: #00bcd4;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .keranjang {
+      background: white;
+      color: #00bcd4;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav {
+      margin: 20px;
+      text-align: center;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: white;
+      background: #00acc1;
+      padding: 10px 18px;
+      border-radius: 8px;
+      margin: 0 8px;
+      transition: background 0.3s ease;
+    }
+
+    .nav a:hover {
+      background: #0097a7;
+    }
+
+    .produk {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 40px;
+    }
+
+    .item {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+    }
+
+    .item img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .item h2 {
+      font-size: 20px;
+      margin: 15px 0 8px;
+    }
+
+    .harga {
+      color: #e67e22;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      background: #00acc1;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin: 5px 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #0097a7;
+    }
+
+    footer {
+      background: #e0e0e0;
+      color: #555;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo Toko">
+    <h1>Pojok Pangan</h1>
+    <div class="keranjang" onclick="toggleKeranjang()">
+      🛒 Keranjang (<span id="jumlahKeranjang">0</span>)
+    </div>
+  </header>
+
+  <div class="nav">
+    <a href="index.html">🏠 Beranda</a>
+    <a href="checkout.html">🧾 Checkout</a>
+  </div>
+
+  <div class="produk" id="produkList">
+    <!-- Produk akan ditambahkan lewat JavaScript -->
+  </div>
+
+  <footer>
+    © 2025 Pojok Pangan | Belanja Mudah, Hemat, & Aman
+  </footer>
+
+  <script>
+    const produk = [
+      { nama: "Beras Premium", harga: 47000, gambar: "beras.jpg" },
+      { nama: "Minyak Goreng", harga: 28500, gambar: "minyak.webp" },
+      { nama: "Gula Pasir", harga: 18000, gambar: "gula.jpg" },
+      { nama: "Mie Instan", harga: 1850, gambar: "sakura.jpg" },
+      { nama: "Daging Sapi", harga: 42000, gambar: "daging.webp" },
+      { nama: "Telur Omega", harga: 26180, gambar: "telur.jpeg" },
+      { nama: "Garam", harga: 10380, gambar: "garam.jpg" },
+      { nama: "Susu Cimory", harga: 6800, gambar: "susu.png" },
+      { nama: "Tepung", harga: 14000, gambar: "tepung.jpg" },
+    ];
+
+    function renderProduk() {
+      const container = document.getElementById("produkList");
+      container.innerHTML = "";
+
+      produk.forEach(p => {
+        container.innerHTML += `
+          <div class="item">
+            <img src="${p.gambar}" alt="${p.nama}" />
+            <h2>${p.nama}</h2>
+            <p class="harga">Rp ${p.harga.toLocaleString()}</p>
+            <button class="btn" onclick="tambahKeranjang('${p.nama}', ${p.harga})">+ Keranjang</button>
+          </div>`;
+      });
+    }
+
+    function tambahKeranjang(nama, harga) {
+      let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+      keranjang.push({ nama, harga });
+      localStorage.setItem("keranjang", JSON.stringify(keranjang));
+      updateKeranjang();
+    }
+
+    function updateKeranjang() {
+      let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+      document.getElementById("jumlahKeranjang").innerText = keranjang.length;
+    }
+
+    function toggleKeranjang() {
+      alert("Fitur keranjang belum diimplementasikan di halaman ini.");
+    }
+
+    renderProduk();
+    updateKeranjang();
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kontak Kami - Pojok Pangan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-YL3HmiT3h2USZxHT3mY1EF6Y3QDH3eUXehhUuAx9PZ3eJK8+oLo5sR65gxnqbmwQ0FQ7f+zEh1Fkk/xdFlXq1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      background: #00a8b5;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      margin: 0;
+    }
+
+    .konten {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .konten h2 {
+      color: #00a8b5;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    .info-kontak {
+      font-size: 18px;
+      color: #333;
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    .info-kontak i {
+      color: #00a8b5;
+      margin-right: 10px;
+      width: 20px;
+    }
+
+    .btn-kembali {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 12px 25px;
+      background: #00a8b5;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+
+    .btn-kembali:hover {
+      background: #008a94;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #eee;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Logo Toko">
+    <h1>Pojok Pangan 📦</h1>
+  </header>
+
+  <div class="konten">
+    <h2>Hubungi Pojok Pangan</h2>
+
+    <div class="info-kontak">
+      <p><i class="fas fa-envelope"></i><strong>📧Email:</strong> pojokpangan@gmail.com</p>
+      <p><i class="fas fa-phone"></i><strong>📱Nomor HP / WA:</strong> 0812-3456-7890</p>
+      <p><i class="fas fa-map-marker-alt"></i><strong>📍Alamat:</strong> Jl. Batu Ampar No. 21, Jakarta Timur</p>
+    </div>
+
+    <a href="index.html" class="btn-kembali"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
+  </div>
+
+  <footer>
+    © 2025 Pojok Pangan | Belanja Mudah, Hemat, & Aman
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beranda Toko Sembako</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      color: #333;
+    }
+
+    header {
+      background: #00bcd4;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .konten {
+      padding: 60px 20px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      margin-top: 40px;
+    }
+
+    .konten h2 {
+      color: #00bcd4;
+      font-size: 36px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .konten p {
+      font-size: 18px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      text-decoration: none;
+      background: #00acc1;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 17px;
+      margin: 12px 10px;
+      display: inline-block;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:hover {
+      background: #0097a7;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 15px 20px;
+      background: #e0e0e0;
+      color: #555;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .konten h2 {
+        font-size: 28px;
+      }
+
+      .btn {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Logo Toko" />
+    <h1>Pojok Pangan</h1>
+  </header>
+
+  <div class="konten">
+    <h2>Selamat Datang di Pojok Pangan! 👋</h2>
+    <p>
+      Toko sembako online yang menawarkan pengalaman belanja kebutuhan harianmu dengan praktis dan hemat.
+      Kami menyediakan berbagai bahan pokok seperti beras, minyak goreng, gula, tepung, dan kebutuhan dapur lainnya.
+    </p>
+    <p>
+      Tinggal klik, pesan, dan barang langsung kami antar ke rumahmu!  
+      Belanja makin mudah dengan harga terjangkau dan pelayanan terbaik.
+    </p>
+    <p>
+      💙 Yuk, belanja sekarang — Nyaman, Hemat, dan Terpercaya!
+    </p>
+
+    <a href="produk.html" class="btn">🛒 Belanja Sekarang</a>
+    <a href="kontak.html" class="btn">📞 Kontak Kami</a>
+    <a href="ulasan.html" class="btn">⭐ Ulasan Pembeli</a>
+  </div>
+
+  <footer>
+    © 2025 Pojok Pangan | Belanja Mudah, Hemat, & Aman
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Pesanan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #00a8b5;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .konten {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00a8b5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #00a8b5;
+      color: #fff;
+    }
+
+    .btn-hapus {
+      background: #dc3545;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-hapus:hover {
+      background: #c82333;
+    }
+
+    .total {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .btn-konfirmasi {
+      background: #00a8b5;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      font-size: 16px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-konfirmasi:hover {
+      background: #007f91;
+    }
+
+    .kembali {
+      display: inline-block;
+      background: #555;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Logo Toko">
+    <h1>Checkout Pojok Pangan</h1>
+  </header>
+
+  <div class="konten">
+    <h2>Pesanan Anda</h2>
+
+    <table id="tabelPesanan">
+      <tr>
+        <th>Produk</th>
+        <th>Harga</th>
+        <th>Aksi</th>
+      </tr>
+    </table>
+
+    <div class="total" id="totalHarga">Total: Rp 0</div>
+
+    <a href="produk.html" class="kembali">⬅️ Kembali Belanja</a>
+
+    <form id="formPesanan">
+      <h2>Data Pembeli</h2>
+      <label for="nama">Nama Lengkap</label>
+      <input type="text" id="nama" required>
+
+      <label for="alamat">Alamat Lengkap</label>
+      <textarea id="alamat" rows="3" required></textarea>
+
+      <label for="hp">Nomor HP</label>
+      <input type="text" id="hp" required>
+
+      <label for="metode">Metode Pembayaran</label>
+      <select id="metode" required>
+        <option value="">-- Pilih Metode --</option>
+        <option value="COD (Bayar di Tempat)">COD (Bayar di Tempat)</option>
+        <option value="Transfer Bank">Transfer Bank</option>
+        <option value="E-Wallet (DANA/OVO/Gopay)">E-Wallet (DANA/OVO/Gopay/Spay)</option>
+      </select>
+
+      <button type="submit" class="btn-konfirmasi">Konfirmasi & Kirim WhatsApp</button>
+    </form>
+  </div>
+
+  <script>
+    function tampilkanPesanan() {
+      let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+      let tabel = document.getElementById('tabelPesanan');
+      let total = 0;
+
+      keranjang.forEach((item, index) => {
+        let row = tabel.insertRow();
+        row.insertCell(0).innerText = item.nama;
+        row.insertCell(1).innerText = "Rp " + item.harga.toLocaleString();
+        let aksi = row.insertCell(2);
+        aksi.innerHTML = `<a href="#" class="btn-hapus" onclick="hapusPesanan(${index})">Hapus</a>`;
+        total += item.harga;
+      });
+
+      document.getElementById('totalHarga').innerText = "Total: Rp " + total.toLocaleString();
+    }
+
+    function hapusPesanan(index) {
+      let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+      keranjang.splice(index, 1);
+      localStorage.setItem('keranjang', JSON.stringify(keranjang));
+      location.reload();
+    }
+
+    document.getElementById('formPesanan').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let nama = document.getElementById('nama').value;
+      let alamat = document.getElementById('alamat').value;
+      let hp = document.getElementById('hp').value;
+      let metode = document.getElementById('metode').value;
+      let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+
+      if (keranjang.length === 0) {
+        alert("Keranjang kamu kosong!");
+        return;
+      }
+
+      if (!nama || !alamat || !hp || !metode) {
+        alert("Mohon lengkapi semua data pembeli dan metode pembayaran.");
+        return;
+      }
+
+      let total = keranjang.reduce((sum, item) => sum + item.harga, 0);
+      let detailPesanan = keranjang.map(p => `- ${p.nama}: Rp ${p.harga.toLocaleString()}`).join('%0A');
+
+      let noAdmin = '6282110870547';
+      let pesan = 
+        `Halo Admin Pojok Pangan!%0A%0ASaya ingin memesan:%0A${detailPesanan}%0A%0ATotal: Rp ${total.toLocaleString()}%0A%0AData Pembeli:%0ANama: ${nama}%0AAlamat: ${alamat}%0ANo HP: ${hp}%0AMetode Pembayaran: ${metode}`;
+
+      let urlWA = `https://wa.me/${noAdmin}?text=${pesan}`;
+      window.open(urlWA, '_blank');
+
+      localStorage.removeItem('keranjang');
+      location.href = 'index.html';
+    });
+
+    tampilkanPesanan();
+  </script>
+
+</body>
+</html>

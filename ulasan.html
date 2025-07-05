@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ulasan Pembeli - Pojok Pangan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #00a8b5;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #00a8b5;
+    }
+
+    .ulasan-item {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+      margin-bottom: 20px;
+    }
+
+    .stars {
+      color: #ffcc00;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .form-ulasan {
+      margin-top: 40px;
+    }
+
+    .form-ulasan input, 
+    .form-ulasan textarea, 
+    .form-ulasan select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .form-ulasan button {
+      background: #00a8b5;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .form-ulasan button:hover {
+      background: #254a99;
+    }
+
+    .kembali {
+      display: inline-block;
+      text-align: center;
+      margin-top: 30px;
+      color: #00a8b5;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .kembali:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #eee;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Logo Toko">
+    <h1>Ulasan Pembeli</h1>
+  </header>
+
+  <div class="container">
+    <h2>Apa Kata Mereka?</h2>
+
+    <div id="daftarUlasan">
+      <!-- Ulasan akan dimuat di sini -->
+    </div>
+
+    <div class="form-ulasan">
+      <h3>Tambahkan Ulasan Anda</h3>
+      <form id="formUlasan" onsubmit="tambahUlasan(event)">
+        <input type="text" id="nama" placeholder="Nama Anda" required>
+        <select id="rating" required>
+          <option value="">Pilih Rating</option>
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★☆ (4)</option>
+          <option value="3">★★★☆☆ (3)</option>
+          <option value="2">★★☆☆☆ (2)</option>
+          <option value="1">★☆☆☆☆ (1)</option>
+        </select>
+        <textarea id="komentar" rows="4" placeholder="Tulis ulasan Anda..." required></textarea>
+        <button type="submit">Kirim Ulasan</button>
+      </form>
+    </div>
+
+    <a href="index.html" class="kembali">← Kembali ke Beranda</a>
+  </div>
+
+  <footer>
+    © 2025 Pojok Pangan | Belanja Mudah, Hemat, & Aman
+  </footer>
+
+  <script>
+    function tampilkanBintang(rating) {
+      const filled = "★".repeat(rating);
+      const empty = "☆".repeat(5 - rating);
+      return filled + empty;
+    }
+
+    function tampilkanUlasan() {
+      const container = document.getElementById("daftarUlasan");
+      container.innerHTML = "";
+
+      const ulasan = JSON.parse(localStorage.getItem("ulasanPembeli")) || [
+        {
+          nama: "Sekar, Bekasi",
+          rating: 5,
+          komentar: "Barang sampai cepat dan kualitas oke banget!"
+        },
+        {
+          nama: "Ulend, Surabaya",
+          rating: 4,
+          komentar: "Cukup puas, harga murah dan pelayanan ramah."
+        },
+        {
+          nama: "Dini, Jogja",
+          rating: 5,
+          komentar: "Langganan belanja di sini. Amanah dan terpercaya."
+        }
+      ];
+
+      ulasan.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "ulasan-item";
+        div.innerHTML = `
+          <div class="stars">${tampilkanBintang(item.rating)}</div>
+          <p>"${item.komentar}"</p>
+          <p><strong>– ${item.nama}</strong></p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function tambahUlasan(e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const rating = parseInt(document.getElementById("rating").value);
+      const komentar = document.getElementById("komentar").value;
+
+      const ulasanBaru = { nama, rating, komentar };
+      const ulasan = JSON.parse(localStorage.getItem("ulasanPembeli")) || [];
+      ulasan.push(ulasanBaru);
+      localStorage.setItem("ulasanPembeli", JSON.stringify(ulasan));
+
+      document.getElementById("formUlasan").reset();
+      tampilkanUlasan();
+      alert("Terima kasih atas ulasan Anda!");
+    }
+
+    tampilkanUlasan();
+  </script>
+
+</body>
+</html>
